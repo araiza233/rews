@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.multipart.maxSize" value="10000000" />
+    <package name="basicstruts2" extends="struts-default">
+        <interceptors>
+            <interceptor name="alias" class="interceptor"/>
+            <interceptor-stack name="newStack">
+                <interceptor-ref name="alias"/>
+            </interceptor-stack>
+        </interceptors>
+        <global-results>
+            <result name="logon" type="dispatcher">/modulo1/logon.jsp</result>
+            <result name="error">/error.jsp</result>
+        </global-results>
+        <action name="reportucos">
+            <interceptor-ref name="newStack"/>
+            <result>/modulo1/reportes.jsp</result>
+        </action>
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+        <action name="struts" class="org.apache.struts.publicidad.action.HelloWorldAction" method="execute">
+            <result>/struts.jsp</result>
+        </action>
+        <action name="doUpload" class="org.apache.struts.publicidad.action.UploadAction">
+            <result name="success">/modulo1/buscarProducto.jsp</result>
+        </action>
+        <action name="register">
+            <result>/register.jsp</result>
+        </action>
+        <action name="registerr" class="org.apache.struts.publicidad.action.Register" method="execute">
+            <result name="success">/thankyou.jsp</result>
+        </action>
+        <action name="userAction" class="com.mkyong.user.action.UserAction" >
+            <result name="success">/User.jsp</result>
+        </action>
+        <action name="userSpringAction" class="userSpringAction" >
+            <result name="success">/User.jsp</result>
+        </action>
+        <action name="decorator">
+            <result>/data/menu.jsp</result>
+        </action>
+        <action name="jquery">
+            <result>/jQuery/jquery.jsp</result>
+        </action>
+        <action name="nuevoProducto">
+            <interceptor-ref name="newStack"/>
+            <result>/modulo1/nuevoProducto.jsp</result>
+        </action>
+        <action name="buscarProducto">
+            <interceptor-ref name="newStack"/>
+            <result>/modulo1/buscarProducto.jsp</result>
+        </action>
+        <action name="nuevaVenta">
+                <interceptor-ref name="newStack"/>
+                <result>/modulo1/nuevaVenta.jsp</result>
+        </action>
+        <action name="mostrarReporte" class="mostrarReporteAction">
+            <result name="success">/modulo1/reportes.jsp</result>
+            <result name="mostrar">/modulo1/reportes.jsp</result>
+        </action>
+        <action name="accesos" class="jQueryAccesos" >
+           <result>/modulo1/logon.jsp</result>
+        </action>
+        <action name="password">
+           <interceptor-ref name="newStack"/>
+           <result>/modulo1/password.jsp</result>
+        </action>
+        <action name="loguearse" class="jQueryAccesos" method="getAccesos">
+           <result name="loguearse">/modulo1/logon.jsp</result>
+           <result name="success">/modulo1/nuevaVenta.jsp</result>
+        </action>
+        <action name="password2" class="jQueryAccesos" method="modificarPass">
+           <result name="error">/error.jsp</result>
+           <result name="success">/modulo1/password2.jsp</result>
+           <result name="logon">/modulo1/logon.jsp</result>
+        </action>
+        
+        <action name="crearUser" class="usuarios">
+           <result name="error">/error.jsp</result>
+           <result name="success">/modulo1/crearUser.jsp</result>
+           <result name="logon">/modulo1/logon.jsp</result>
+           <result name="resultado">/modulo1/crearUser2.jsp</result>
+           <result name="modificarUsers">/modulo1/modificarUsers.jsp</result>
+        </action>
+        <action name="precios" class="precios">
+           <result name="error">/error.jsp</result>
+           <result name="success">/modulo1/precios.jsp</result>
+        </action>
+        <action name="imprimirTicket" class="ticketsAction">
+            <result name="success">/reportes/ticket.pdf</result>
+            <result name="error">/error.jsp</result>
+        </action>
+    </package>
+    <package name="basic" extends="struts-default,json-default" namespace="/ajax">
+        
+        
+        <action class="jQueryAction" method="sayHi" name="sayHi">
+            <result type="json">
+                <param name="excludeProperties">hibernateTemplate</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+        
+        <action class="jQueryNuevoProducto" method="guardar" name="guardar">
+            <result type="json">
+                <param name="excludeProperties">nuevoProductoLogicInterface</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+        
+        <action class="jQueryNuevoProducto" method="buscarProducto" name="buscarProducto">
+            <result type="json">
+                <param name="excludeProperties">nuevoProductoLogicInterface</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+        
+        <action class="jQueryNuevoProducto" method="editarProducto" name="editarProducto">
+            <result type="json">
+                <param name="excludeProperties">nuevoProductoLogicInterface</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+        
+        <action class="jQueryNuevoProducto" method="buscarProductoVenta" name="buscarProductoVenta">
+            <result type="json">
+                <param name="excludeProperties">nuevoProductoLogicInterface</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+        
+        <action class="jQueryNuevoProducto" method="guardarVenta" name="guardarVenta">
+            <result type="json">
+                <param name="excludeProperties">nuevoProductoLogicInterface</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+        
+        <action class="jQueryNuevoProducto" method="buscarProductoCodigo" name="buscarProductoCodigo">
+            <result type="json">
+                <param name="excludeProperties">nuevoProductoLogicInterface</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+        <action class="jQueryAccesos" method="modificarPass" name="modificarPass">
+            <result type="json">
+                <param name="excludeProperties">acceso</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+        <action class="jQueryNuevoProducto" method="actualizar" name="actualizar">
+            <result type="json">
+                <param name="excludeProperties">nuevoProductoLogicInterface</param>
+                <param name="ignoreHierarchy">false</param>
+                <param name="excludeNullProperties">true</param>
+            </result>
+        </action>
+    </package>
+</struts>

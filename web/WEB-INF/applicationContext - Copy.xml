@@ -1,0 +1,88 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.1.xsd" xmlns:cache="http://www.springframework.org/schema/cache">
+ 
+    <bean id="userBo" class="com.mkyong.user.bo.impl.UserBoImpl" />
+
+    <bean id="userSpringAction" class="com.mkyong.user.action.UserSpringAction">
+            <property name="userBo" ref="userBo" />	
+            <property name="hibernateTemplate" ref="hibernateTemplate" />	
+    </bean>
+    <bean id="jQueryAction" class="com.mkyong.user.action.JQueryAction">
+            <property name="hibernateTemplate" ref="hibernateTemplate" />	
+    </bean>
+        
+    <bean id="jQueryNuevoProducto" class="org.apache.struts.publicidad.action.NuevoProductoAction">
+            <property name="producto" ref="producto" />
+            <property name="ventas" ref="ventas" />
+            <property name="detalleVentas" ref="detalleVentas" />
+            <property name="nuevoProductoLogicInterface" ref="nuevoProductoLogicInterface" />	
+    </bean>
+
+    <bean id='dataSource' class='org.springframework.jdbc.datasource.DriverManagerDataSource'>
+            
+            <!--datos conexion ORCALE-->
+            <!--<property name='driverClassName' value='oracle.jdbc.driver.OracleDriver' />-->
+            <!--<property name='url' value='jdbc:oracle:thin:@everest:1521:XE' />-->
+            <!--<property name='username' value='usrProyectos'/>-->
+            <!--<property name='password' value='usrProyectos'/>-->
+            <!--FIN datos conexion ORCALE-->
+            
+            <!--datos conexion myMYSQL-->
+            <!--<property name='driverClassName' value='com.mysql.jdbc.Driver' />-->
+            <!--<property name='url' value='jdbc:mysql://192.168.0.200:3306/publicidad' />-->
+            <!--<property name='username' value='jorge' />-->
+            <!--<property name='password' value='jorgejorge' />-->
+            <!--FIN datos conexion mysql-->
+
+            <!--datos conexion POSTGRESQL-->
+            <property name='driverClassName' value='org.postgresql.Driver' />
+            <!--<property name='url' value='jdbc:postgresql://192.168.0.200:5432/publicidad' />-->
+            <property name='url' value='jdbc:postgresql://localhost:5432/publicidad' />
+            <property name='username' value='postgres' />
+            <property name='password' value='' />
+            <!--FIN datos conexion postgresql-->
+    </bean>
+ <!-- configure hibernate session factory -->
+ <bean id='sessionFactory' class='org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean'>
+      <property name='dataSource' ref='dataSource' />
+      <property name='annotatedClasses' >
+       <list>
+        <value>com.publicidad.entities.Empresa</value>
+	<value>com.publicidad.entities.Producto</value>
+        <value>com.publicidad.entities.Ventas</value>
+        <value>com.publicidad.entities.DetalleVentas</value>
+       </list>
+      </property>
+      <property name='hibernateProperties'>
+       <props>
+        <!--<prop key='dialect'>org.hibernate.dialect.OracleDialect</prop>-->
+        <!--<prop key='dialect'>org.hibernate.dialect.MySQLDialect</prop>-->
+        <prop key='dialect'>org.hibernate.dialect.PostgreSQLDialect</prop>
+        <prop key='hibernate.show_sql'>true</prop>
+        <prop key='hibernate.hbm2ddl.auto'>update</prop>
+        <prop key='hibernate.query_factory_class'>org.hibernate.hql.ast.ASTQueryTranslatorFactory</prop>
+        <prop key='hibernate.current_session_context_class'>org.hibernate.context.ThreadLocalSessionContext</prop>
+       </props>
+      </property>
+ </bean>
+ <!--  
+   configure the Spring hibernate template with the session factory from above  
+--> 
+   <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate"> 
+      <property name="sessionFactory">
+          <ref bean="sessionFactory"/>
+      </property> 
+   </bean>
+   <bean id="producto" class="com.publicidad.entities.Producto"></bean>
+   <bean id="ventas" class="com.publicidad.entities.Ventas"></bean>
+   <bean id="detalleVentas" class="com.publicidad.entities.DetalleVentas"></bean>
+   <bean id="nuevoProductoLogicInterface" class="com.publicidad.logic.NuevoProductoLogic">
+       <property name="nuevoProductoDao" ref="nuevoProductoDao" />
+   </bean>
+   <bean id="nuevoProductoDao" class="com.publicidad.dao.NuevoProductoDaoImp">
+        <property name="hibernateTemplate" ref="hibernateTemplate" />
+   </bean>
+</beans>

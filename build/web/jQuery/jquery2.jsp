@@ -1,0 +1,1 @@
+Viene de jQuery, despues de guardar un registro

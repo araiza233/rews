@@ -1,0 +1,79 @@
+<%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8" ?>
+<link rel="stylesheet" href="scripts/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
+<script src="scripts/js/jquery-1.10.2.min.js"></script>
+<script src="scripts/js/jquery-ui-1.10.3.custom.min.js"></script> 
+<link href="styles/my_style.css" rel="stylesheet">
+<script type="text/javascript" src="scripts/interface.js"> </script>
+<link href="styles/style.css" rel="stylesheet" type="text/css" />
+<script type="scripts/javascript" src="scripts/jquery.js"></script>
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title><decorator:title default="Sistema de tienditas"/></title>
+    <style> 
+        #change_me {
+        position: absolute;
+        top: 100px;
+        left: 400px;
+        font: 24px arial;}
+        #move_up #move_down #color #disappear {
+        padding: 5px;}
+    </style>
+   
+	
+</head>
+<body>
+    <h1 align="center">Sistema de Venta y administracion de productos</h1><br>
+        <div class="dock" id="dock">
+          <div class="dock-container">
+                  <a class="dock-item" href="nuevoProducto"><img src="images/images2/nuevoProducto.jpg" alt="Nuevo producto" /><span>Nuevo Producto</span></a> 
+                  <a class="dock-item" href="buscarProducto"><img src="images/images2/editar.jpg" alt="Editar producto" /><span>Editar producto</span></a> 
+                  <a class="dock-item" href="#"><img src="images/images2/eliminarProducto.png" alt="Eliminar producto" /><span>Eliminar producto</span></a> 
+                  <a class="dock-item" href="#"><img src="images/images2/venta.jpg" alt="Realizar Venta" /><span>Realizar venta</span></a>
+          </div> 
+        </div>
+    <hr/>
+    <decorator:body />
+    <hr/>
+    <h1>Footer</h1>
+    <p><a href="<s:url action='index'/>">index</a></p>
+    <script type="text/javascript">
+	
+	$(document).ready(
+		function()
+		{
+			$('#dock').Fisheye(
+				{
+					maxWidth: 50,
+					items: 'a',
+					itemsText: 'span',
+					container: '.dock-container',
+					itemWidth: 40,
+					proximity: 90,
+					halign : 'center'
+				}
+			)
+			$('#dock2').Fisheye(
+				{
+					maxWidth: 60,
+					items: 'a',
+					itemsText: 'span',
+					container: '.dock-container2',
+					itemWidth: 40,
+					proximity: 80,
+					alignment : 'left',
+					valign: 'bottom',
+					halign : 'center'
+				}
+			)
+		}
+	);
+
+    </script>
+</body>
+</html>

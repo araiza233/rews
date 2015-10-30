@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+    <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+    <property name="hibernate.connection.url">jdbc:oracle:thin:@192.168.1.68:1521:xe</property>
+    <property name="hibernate.connection.username">usrProyectos</property>
+    <property name="hibernate.connection.password">usrProyectos</property>
+    <property name="hibernate.default_schema">usrProyectos</property>
+    <property name='annotatedClasses' >
+       <list>
+        <value>com.publicidad.entities.Empresa</value>
+       </list>
+     </property>
+  </session-factory>
+</hibernate-configuration>
